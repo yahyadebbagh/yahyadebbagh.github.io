@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yahya Debbagh · Portfolio</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -212,13 +215,8 @@ textarea{min-height:120px;resize:vertical}
 @media (max-width:860px){.contact{grid-template-columns:1fr}}
 
 /* FOOTER title block */
-footer{padding:40px 0 48px}
-.tb{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;border:1px solid var(--line);border-radius:8px;background:rgba(16,26,43,.85)}
-.tb div{padding:12px 16px;border-left:1px solid var(--line)}
-.tb div:first-child{border-left:0}
-.tb .mono{font-size:10.5px;display:block}
-.tb b{font-family:var(--display);font-weight:700;font-size:15px}
-@media (max-width:640px){.tb{grid-template-columns:1fr 1fr}.tb div:nth-child(3){border-left:0}.tb div:nth-child(n+3){border-top:1px solid var(--line)}}
+footer{padding:8px 0 40px;border-top:1px solid var(--line)}
+.foot{margin:24px 0 0;font-family:var(--mono);font-size:12px;color:var(--muted);text-align:center}
 
 /* MODAL */
 dialog{border:1px solid var(--line);border-radius:14px;background:#0F1828;color:var(--text);padding:0;width:min(860px,calc(100vw - 32px));max-height:calc(100vh - 48px)}
@@ -384,14 +382,7 @@ dialog[open]{animation:pop .22s ease-out}
 </main>
 
 <footer>
-  <div class="wrap">
-    <div class="tb">
-      <div><span class="mono" data-i18n="tb_1"></span><b>Yahya Debbagh</b></div>
-      <div><span class="mono" data-i18n="tb_2"></span><b>ENSA Agadir</b></div>
-      <div><span class="mono" data-i18n="tb_3"></span><b>1 : 1</b></div>
-      <div><span class="mono" data-i18n="tb_4"></span><b>A · 2026</b></div>
-    </div>
-  </div>
+  <div class="wrap"><p class="foot">© 2026 Yahya Debbagh</p></div>
 </footer>
 
 <dialog id="modal" aria-labelledby="m-title">
@@ -434,7 +425,7 @@ const T = {
     f_name:"Nom",f_mail:"Email",f_msg:"Message",f_send:"Envoyer le message",
     f_err:"Merci de remplir les trois champs avec un email valide.",
     f_ok:"Votre application mail va s'ouvrir avec le message prêt. Si rien ne s'ouvre, écrivez directement à yahyadebbagh20@gmail.com.",
-    tb_1:"Dessiné par",tb_2:"Établissement",tb_3:"Échelle",tb_4:"Révision",
+    
     m_close:"Fermer",m_proj:"Projet",m_miss:"Missions principales",m_res:"Résultats",m_skills:"Compétences mobilisées",m_dmaic:"Démarche DMAIC",m_role:"Mon rôle",m_photos:"Photos",ph_soon:"Photo à venir",
     before:"Avant",after:"Après",cv_t:"Curriculum vitæ",cv_sub:"Version PDF disponible sur demande"
   },
@@ -454,7 +445,7 @@ const T = {
     f_name:"Name",f_mail:"Email",f_msg:"Message",f_send:"Send message",
     f_err:"Please fill in all three fields with a valid email.",
     f_ok:"Your mail app will open with the message ready. If nothing opens, write directly to yahyadebbagh20@gmail.com.",
-    tb_1:"Drawn by",tb_2:"School",tb_3:"Scale",tb_4:"Revision",
+    
     m_close:"Close",m_proj:"Project",m_miss:"Main missions",m_res:"Results",m_skills:"Skills applied",m_dmaic:"DMAIC approach",m_role:"My role",m_photos:"Photos",ph_soon:"Photo coming soon",
     before:"Before",after:"After",cv_t:"Curriculum vitae",cv_sub:"PDF version available on request"
   }
