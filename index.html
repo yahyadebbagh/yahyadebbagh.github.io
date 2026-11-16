@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yahya Debbagh · Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a technical drawing sheet. Ink-navy paper with a faint grid, safety-orange for what matters, sections labelled like drawing views, a title-block footer. */
+:root{
+  --ink:#0A111E;        /* page */
+  --panel:#101A2B;      /* cards */
+  --line:#223250;       /* hairlines, grid */
+  --text:#E7ECF3;
+  --muted:#8E9AB0;
+  --accent:#FF7A1A;     /* safety orange */
+  --data:#5CC6EE;       /* measurements */
+  --display:"Archivo", "Arial Narrow", system-ui, sans-serif;
+  --body:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{
+  margin:0;background:var(--ink);color:var(--text);font-family:var(--body);font-size:16px;line-height:1.6;
+  background-image:
+    linear-gradient(var(--line) 1px,transparent 1px),
+    linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:48px 48px;background-attachment:fixed;
+}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(10,17,30,.55),rgba(10,17,30,.92) 70%);pointer-events:none;z-index:0}
+main,header,footer{position:relative;z-index:1}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.05}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:20;background:rgba(10,17,30,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:20px;height:64px}
+.brand{font-family:var(--display);font-stretch:125%;font-weight:800;font-size:18px;text-decoration:none;display:flex;align-items:center;gap:10px}
+.brand i{width:10px;height:10px;background:var(--accent);display:inline-block;transform:rotate(45deg)}
+.links{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.links a{text-decoration:none;color:var(--muted);font-size:14px;padding:8px 10px;border-radius:6px;white-space:nowrap}
+.links a:hover{color:var(--text);background:var(--panel)}
+.lang{display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;flex-shrink:0}
+.lang button{background:none;border:0;color:var(--muted);font-family:var(--mono);font-size:12px;padding:7px 10px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--accent);color:#1a0d02;font-weight:500}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--body);font-weight:600;font-size:15px;padding:12px 20px;border-radius:8px;text-decoration:none;cursor:pointer;border:1px solid transparent;transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--accent);color:#1a0d02}
+.btn-ghost{border-color:var(--line);background:rgba(16,26,43,.7);color:var(--text)}
+.btn-ghost:hover{border-color:var(--muted)}
+.nav .btn{padding:8px 14px;font-size:14px;flex-shrink:0}
+@media (max-width:860px){.links{display:none}.lang{margin-left:auto}}
+
+/* HERO */
+.hero{padding:72px 0 40px}
+.hero-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:56px;align-items:center}
+.hero .mono b{color:var(--accent);font-weight:500}
+.hero h1{font-size:clamp(44px,7vw,88px);font-stretch:118%;font-weight:850;letter-spacing:-.02em;margin:14px 0 18px}
+.hero h1 span{display:block;color:var(--accent)}
+.hero .role{font-size:19px;font-weight:500;margin:0 0 12px}
+.hero .intro{color:var(--muted);max-width:56ch;margin:0 0 28px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.frame{position:relative;padding:18px}
+.frame img{border-radius:4px;filter:saturate(.95) contrast(1.03);aspect-ratio:1/1;object-fit:cover;width:100%}
+.frame::before,.frame::after{content:"";position:absolute;width:28px;height:28px;border:2px solid var(--accent)}
+.frame::before{top:0;left:0;border-right:0;border-bottom:0}
+.frame::after{bottom:0;right:0;border-left:0;border-top:0}
+.dim{position:absolute;left:18px;right:18px;bottom:-14px;display:flex;align-items:center;gap:8px;color:var(--data);font-family:var(--mono);font-size:11px;letter-spacing:.06em}
+.dim::before,.dim::after{content:"";flex:1;height:1px;background:var(--data);opacity:.6}
+.dim-v{position:absolute;top:18px;bottom:18px;right:-6px;writing-mode:vertical-rl;display:flex;align-items:center;gap:8px;color:var(--data);font-family:var(--mono);font-size:11px;letter-spacing:.06em}
+.dim-v::before,.dim-v::after{content:"";flex:1;width:1px;background:var(--data);opacity:.6}
+@media (max-width:860px){.hero-grid{grid-template-columns:1fr;gap:36px}.frame{max-width:340px}.hero{padding-top:44px}}
+
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);margin-top:56px;border:1px solid var(--line);border-radius:10px;background:rgba(16,26,43,.75)}
+.kpi{padding:20px 22px;border-left:1px solid var(--line)}
+.kpi:first-child{border-left:0}
+.kpi strong{display:block;font-family:var(--display);font-stretch:110%;font-size:32px;font-weight:800;color:var(--text);font-variant-numeric:tabular-nums;line-height:1.1}
+.kpi strong em{font-style:normal;color:var(--accent)}
+.kpi span{font-size:13px;color:var(--muted)}
+@media (max-width:760px){.kpis{grid-template-columns:1fr 1fr}.kpi:nth-child(3){border-left:0}.kpi:nth-child(n+3){border-top:1px solid var(--line)}}
+
+.tools{margin-top:28px;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;gap:10px;width:max-content;animation:slide 40s linear infinite}
+.tools:hover .track{animation-play-state:paused}
+@keyframes slide{to{transform:translateX(-50%)}}
+.chip{font-family:var(--mono);font-size:12.5px;padding:7px 12px;border:1px solid var(--line);border-radius:999px;color:var(--text);background:rgba(16,26,43,.8);white-space:nowrap}
+
+/* SECTIONS */
+section{padding:72px 0}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:36px}
+.sec-no{font-family:var(--mono);font-size:13px;color:var(--accent)}
+.sec-head h2{font-size:clamp(30px,4vw,44px);font-stretch:112%;font-weight:800;letter-spacing:-.01em}
+.sec-rule{flex:1;height:1px;background:var(--line);align-self:center}
+.lead{color:var(--muted);max-width:65ch;margin:-16px 0 32px}
+
+/* ABOUT */
+.about{display:grid;grid-template-columns:1.4fr 1fr;gap:48px}
+.about p{margin:0 0 16px;max-width:62ch}
+.about p:first-child{font-size:20px;color:var(--text);font-weight:500;line-height:1.45}
+.about .txt p:not(:first-child){color:#C3CBD8}
+.facts{display:grid;gap:12px;align-content:start}
+.fact{border:1px solid var(--line);border-radius:10px;padding:16px 18px;background:rgba(16,26,43,.75)}
+.fact .mono{margin-bottom:6px;display:block}
+.fact div{font-weight:500}
+@media (max-width:860px){.about{grid-template-columns:1fr}}
+
+/* EXPERIENCE */
+.xp-list{display:grid;gap:16px}
+.xp{display:grid;grid-template-columns:230px 1fr auto;gap:28px;align-items:start;text-align:left;width:100%;font:inherit;color:inherit;background:rgba(16,26,43,.82);border:1px solid var(--line);border-radius:12px;padding:26px 28px;cursor:pointer;position:relative;transition:border-color .2s,transform .2s}
+.xp::before{content:"";position:absolute;left:-1px;top:24px;bottom:24px;width:3px;background:var(--accent);border-radius:0 3px 3px 0;opacity:0;transition:opacity .2s}
+.xp:hover{border-color:#36507a;transform:translateY(-2px)}
+.xp:hover::before{opacity:1}
+.xp .when{font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em}
+.xp .when b{color:var(--data);font-weight:500}
+.xp-img{border-radius:8px;overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3;background:#121d31}
+.xp-img img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.xp:hover .xp-img img{transform:scale(1.03)}
+.xp h3{font-size:22px;font-stretch:105%;font-weight:700;margin-bottom:4px}
+.xp .co{color:var(--accent);font-weight:500;font-size:15px;margin-bottom:10px}
+.xp p{margin:0 0 14px;color:#C3CBD8;max-width:64ch}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:var(--mono);font-size:11.5px;padding:4px 9px;border-radius:4px;background:#17243a;color:#B9C6DA;border:1px solid var(--line)}
+.xp .more{font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap;display:flex;align-items:center;gap:6px}
+.xp:hover .more{color:var(--accent)}
+.xp .result{display:flex;gap:18px;flex-wrap:wrap;margin:0 0 14px}
+.xp .result div{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+.xp .result b{font-family:var(--display);font-stretch:110%;font-size:22px;color:var(--text);font-weight:800;margin-right:6px}
+@media (max-width:760px){.xp{grid-template-columns:1fr;gap:14px;padding:18px}.xp-img{aspect-ratio:16/9}.xp .more{justify-self:start}}
+
+/* SKILLS */
+.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.skill{border:1px solid var(--line);border-radius:12px;padding:22px;background:rgba(16,26,43,.82)}
+.skill h3{font-size:17px;font-stretch:105%;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.skill h3 i{width:8px;height:8px;background:var(--accent);transform:rotate(45deg);flex-shrink:0}
+.langs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+.lng{border:1px solid var(--line);border-radius:12px;padding:18px 22px;background:rgba(16,26,43,.82)}
+.lng b{font-family:var(--display);font-size:18px;font-weight:700}
+.lng .mono{display:block;margin-top:4px}
+.bar{height:4px;background:#1b2a44;border-radius:4px;margin-top:12px;overflow:hidden}
+.bar span{display:block;height:100%;background:var(--data)}
+@media (max-width:860px){.skills{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.skills,.langs{grid-template-columns:1fr}}
+
+/* EDUCATION */
+.edu-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:40px}
+.timeline{position:relative;padding-left:26px;display:grid;gap:22px;align-content:start}
+.timeline::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:1px;background:var(--line)}
+.step{position:relative}
+.step::before{content:"";position:absolute;left:-26px;top:7px;width:11px;height:11px;border:2px solid var(--accent);background:var(--ink);transform:rotate(45deg)}
+.step .mono{color:var(--data)}
+.step h3{font-size:19px;font-weight:700;margin:4px 0 2px}
+.step div{color:var(--muted);font-size:15px}
+.h-sub{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 16px}
+.certs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cert{border:1px solid var(--line);border-radius:10px;padding:16px;background:rgba(16,26,43,.82);display:grid;gap:4px}
+.cert b{font-weight:600;font-size:15px;line-height:1.35}
+.cert span{font-size:13px;color:var(--muted)}
+.cert.star{border-color:#5a3a1c;background:linear-gradient(135deg,rgba(255,122,26,.10),rgba(16,26,43,.82) 60%)}
+@media (max-width:860px){.edu-grid{grid-template-columns:1fr}}
+@media (max-width:520px){.certs{grid-template-columns:1fr}}
+
+/* ACTIVITIES */
+.act-group{margin-bottom:40px}
+.act-group:last-child{margin-bottom:0}
+.act-group .h-sub{display:flex;align-items:center;gap:12px}
+.act-group .h-sub::after{content:"";flex:1;height:1px;background:var(--line)}
+.acts{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ph{position:relative}
+.count{position:absolute;right:10px;bottom:10px;font-family:var(--mono);font-size:11px;padding:4px 8px;border-radius:4px;background:rgba(10,17,30,.82);color:var(--text);border:1px solid var(--line)}
+.gallery button{padding:0;border:0;background:none;cursor:zoom-in;display:block;width:100%}
+.gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;border:1px solid var(--line);transition:opacity .15s}
+.gallery button:hover img{opacity:.85}
+#viewer{width:auto;max-width:calc(100vw - 32px);background:#05080f;border-color:#2a3a58}
+#viewer img{max-width:calc(100vw - 32px);max-height:calc(100vh - 120px);width:auto;height:auto;margin:0 auto}
+.v-bar{display:flex;align-items:center;gap:8px;padding:10px 12px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.v-bar button{background:none;border:1px solid var(--line);color:var(--text);border-radius:6px;padding:6px 12px;cursor:pointer;font:inherit}
+.v-bar button:hover{border-color:var(--accent);color:var(--accent)}
+.v-bar .sp{flex:1;text-align:center}
+@media (max-width:960px){.acts{grid-template-columns:repeat(2,1fr)}}
+.act{text-align:left;font:inherit;color:inherit;background:rgba(16,26,43,.82);border:1px solid var(--line);border-radius:12px;padding:0;overflow:hidden;cursor:pointer;transition:border-color .2s,transform .2s}
+.act:hover{border-color:#36507a;transform:translateY(-2px)}
+.ph{aspect-ratio:16/9;display:grid;place-items:center;background:repeating-linear-gradient(45deg,#121d31 0 10px,#0f1828 10px 20px);border-bottom:1px solid var(--line);color:var(--muted);font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.act-body{padding:20px 22px}
+.act h3{font-size:19px;font-weight:700;margin:6px 0 6px}
+.act p{margin:0;color:#C3CBD8;font-size:15px}
+@media (max-width:700px){.acts{grid-template-columns:1fr}}
+
+/* CONTACT */
+.contact{display:grid;grid-template-columns:1fr 1.2fr;gap:40px}
+.contact h3{font-size:30px;font-stretch:112%;font-weight:800;margin-bottom:12px}
+.contact p{color:var(--muted);margin:0 0 24px;max-width:46ch}
+.ways{display:grid;gap:10px}
+.way{display:flex;align-items:center;gap:14px;border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:rgba(16,26,43,.82);text-decoration:none}
+.way .mono{width:78px;flex-shrink:0}
+.way span:last-child{font-weight:500;word-break:break-all}
+form{border:1px solid var(--line);border-radius:12px;padding:24px;background:rgba(16,26,43,.85);display:grid;gap:14px}
+label{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:grid;gap:6px}
+input,textarea{font:inherit;font-size:15px;text-transform:none;letter-spacing:0;color:var(--text);background:var(--ink);border:1px solid var(--line);border-radius:8px;padding:11px 12px}
+input:focus,textarea:focus{outline:none;border-color:var(--accent)}
+textarea{min-height:120px;resize:vertical}
+.form-note{font-size:14px;color:var(--data);min-height:1.2em;margin:0}
+@media (max-width:860px){.contact{grid-template-columns:1fr}}
+
+/* FOOTER title block */
+footer{padding:40px 0 48px}
+.tb{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;border:1px solid var(--line);border-radius:8px;background:rgba(16,26,43,.85)}
+.tb div{padding:12px 16px;border-left:1px solid var(--line)}
+.tb div:first-child{border-left:0}
+.tb .mono{font-size:10.5px;display:block}
+.tb b{font-family:var(--display);font-weight:700;font-size:15px}
+@media (max-width:640px){.tb{grid-template-columns:1fr 1fr}.tb div:nth-child(3){border-left:0}.tb div:nth-child(n+3){border-top:1px solid var(--line)}}
+
+/* MODAL */
+dialog{border:1px solid var(--line);border-radius:14px;background:#0F1828;color:var(--text);padding:0;width:min(860px,calc(100vw - 32px));max-height:calc(100vh - 48px)}
+dialog::backdrop{background:rgba(4,8,15,.78);backdrop-filter:blur(3px)}
+dialog[open]{animation:pop .22s ease-out}
+@keyframes pop{from{opacity:0;transform:translateY(12px)}}
+.m-head{position:sticky;top:0;background:#0F1828;border-bottom:1px solid var(--line);padding:24px 28px 20px;display:flex;gap:16px;align-items:flex-start;z-index:2}
+.m-head h3{font-size:clamp(22px,3vw,28px);font-stretch:108%;font-weight:800}
+.m-head .mono{color:var(--data);margin-top:8px;display:block}
+.m-head .subj{color:var(--accent);font-weight:500;margin-top:6px}
+.x{margin-left:auto;background:none;border:1px solid var(--line);color:var(--text);width:38px;height:38px;border-radius:8px;cursor:pointer;font-size:20px;line-height:1;flex-shrink:0}
+.x:hover{border-color:var(--accent);color:var(--accent)}
+.m-body{padding:24px 28px 30px}
+.m-body h4{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;margin:26px 0 12px}
+.m-body h4:first-child{margin-top:0}
+.m-body ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.m-body li{position:relative;padding-left:22px;color:#D3DAE5}
+.m-body li::before{content:"";position:absolute;left:2px;top:9px;width:7px;height:7px;background:var(--accent);transform:rotate(45deg)}
+.m-body p{color:#D3DAE5;margin:0}
+.dmaic{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+.dmaic div{background:#17243a;border:1px solid var(--line);padding:10px 8px;text-align:center;border-radius:4px}
+.dmaic div:first-child{border-radius:8px 4px 4px 8px}
+.dmaic b{display:block;font-family:var(--display);font-size:22px;color:var(--accent);font-weight:800}
+.dmaic span{font-size:11.5px;color:var(--muted);font-family:var(--mono)}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ba-card{border:1px solid var(--line);border-radius:10px;padding:16px 18px;background:#121d31}
+.ba-card .mono{display:block;margin-bottom:10px}
+.ba-row{display:grid;grid-template-columns:60px 1fr 64px;gap:10px;align-items:center;font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:8px}
+.ba-row .track2{height:10px;background:#1b2a44;border-radius:3px;overflow:hidden}
+.ba-row .track2 span{display:block;height:100%;border-radius:3px}
+.ba-row b{color:var(--text);font-weight:500;text-align:right;font-variant-numeric:tabular-nums}
+.ba-delta{margin-top:10px;font-family:var(--display);font-weight:800;font-size:20px;color:var(--data)}
+@media (max-width:620px){.ba{grid-template-columns:1fr}.dmaic span{font-size:10px}}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.gallery .ph{border:1px solid var(--line);border-radius:8px;aspect-ratio:4/3}
+.cv-img{border-radius:6px;background:#fff;width:100%}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><i></i>Y. DEBBAGH</a>
+    <nav class="links" aria-label="Sections">
+      <a href="#about" data-i18n="nav_about"></a>
+      <a href="#experience" data-i18n="nav_xp"></a>
+      <a href="#skills" data-i18n="nav_skills"></a>
+      <a href="#education" data-i18n="nav_edu"></a>
+      <a href="#activities" data-i18n="nav_act"></a>
+    </nav>
+    <div class="lang" role="group" aria-label="Langue / Language">
+      <button type="button" id="lang-fr" data-lang="fr" aria-pressed="true">FR</button>
+      <button type="button" id="lang-en" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <a class="btn btn-primary" href="#contact" data-i18n="nav_contact"></a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <div class="mono"><b>●</b> <span data-i18n="hero_status"></span></div>
+          <h1>Yahya <span>Debbagh</span></h1>
+          <p class="role" data-i18n="hero_role"></p>
+          <p class="intro" data-i18n="hero_intro"></p>
+          <div class="cta">
+            <a class="btn btn-primary" href="#contact" data-i18n="hero_cta1"></a>
+            <button class="btn btn-ghost" type="button" id="open-cv" data-i18n="hero_cta2"></button>
+          </div>
+        </div>
+        <div class="frame">
+          <img src="img/photo.jpg" alt="Yahya Debbagh" width="640" height="640">
+          <div class="dim">ENSA AGADIR · GI</div>
+        </div>
+      </div>
+
+      <div class="kpis" id="kpis"></div>
+      <div class="tools" aria-label="Outils"><div class="track" id="tools"></div></div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-no">01</span><h2 data-i18n="about_t"></h2><span class="sec-rule"></span></div>
+      <div class="about">
+        <div class="txt" id="about-txt"></div>
+        <div class="facts" id="facts"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-no">02</span><h2 data-i18n="xp_t"></h2><span class="sec-rule"></span></div>
+      <p class="lead" data-i18n="xp_lead"></p>
+      <div class="xp-list" id="xp-list"></div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-no">03</span><h2 data-i18n="sk_t"></h2><span class="sec-rule"></span></div>
+      <div class="skills" id="skills-grid"></div>
+      <div class="langs" id="langs"></div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-no">04</span><h2 data-i18n="edu_t"></h2><span class="sec-rule"></span></div>
+      <div class="edu-grid">
+        <div>
+          <p class="h-sub" data-i18n="edu_sub1"></p>
+          <div class="timeline" id="timeline"></div>
+        </div>
+        <div>
+          <p class="h-sub" data-i18n="edu_sub2"></p>
+          <div class="certs" id="certs"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACTIVITIES -->
+  <section id="activities">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-no">05</span><h2 data-i18n="act_t"></h2><span class="sec-rule"></span></div>
+      <p class="lead" data-i18n="act_lead"></p>
+      <div id="acts"></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="sec-head"><span class="sec-no">06</span><h2 data-i18n="ct_t"></h2><span class="sec-rule"></span></div>
+      <div class="contact">
+        <div>
+          <h3 data-i18n="ct_h"></h3>
+          <p data-i18n="ct_p"></p>
+          <div class="ways">
+            <a class="way" href="mailto:yahyadebbagh20@gmail.com"><span class="mono">Email</span><span>yahyadebbagh20@gmail.com</span></a>
+            <a class="way" href="https://www.linkedin.com/in/yahyadebbagh/" target="_blank" rel="noopener"><span class="mono">LinkedIn</span><span>linkedin.com/in/yahyadebbagh</span></a>
+            <div class="way"><span class="mono" data-i18n="ct_loc_l"></span><span data-i18n="ct_loc"></span></div>
+          </div>
+        </div>
+        <form id="form" novalidate>
+          <label for="f-name"><span data-i18n="f_name"></span><input id="f-name" name="name" required autocomplete="name"></label>
+          <label for="f-mail"><span data-i18n="f_mail"></span><input id="f-mail" name="email" type="email" required autocomplete="email"></label>
+          <label for="f-msg"><span data-i18n="f_msg"></span><textarea id="f-msg" name="message" required></textarea></label>
+          <button class="btn btn-primary" type="submit" data-i18n="f_send"></button>
+          <p class="form-note" id="form-note" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="tb">
+      <div><span class="mono" data-i18n="tb_1"></span><b>Yahya Debbagh</b></div>
+      <div><span class="mono" data-i18n="tb_2"></span><b>ENSA Agadir</b></div>
+      <div><span class="mono" data-i18n="tb_3"></span><b>1 : 1</b></div>
+      <div><span class="mono" data-i18n="tb_4"></span><b>A · 2026</b></div>
+    </div>
+  </div>
+</footer>
+
+<dialog id="modal" aria-labelledby="m-title">
+  <div class="m-head">
+    <div>
+      <h3 id="m-title"></h3>
+      <span class="mono" id="m-when"></span>
+      <div class="subj" id="m-subj"></div>
+    </div>
+    <button class="x" type="button" id="m-close" aria-label="Fermer">×</button>
+  </div>
+  <div class="m-body" id="m-body"></div>
+</dialog>
+
+<dialog id="viewer" aria-label="Photo">
+  <img id="v-img" alt="">
+  <div class="v-bar">
+    <button type="button" id="v-prev" aria-label="Photo précédente">←</button>
+    <span class="sp" id="v-count"></span>
+    <button type="button" id="v-next" aria-label="Photo suivante">→</button>
+    <button type="button" id="v-close" aria-label="Fermer">×</button>
+  </div>
+</dialog>
+
+<script>
+const T = {
+  fr:{
+    nav_about:"À propos",nav_xp:"Expériences",nav_skills:"Compétences",nav_edu:"Formation",nav_act:"Parascolaire",nav_contact:"Contact",
+    hero_status:"Ouvert aux opportunités · Stage de fin d'études",
+    hero_role:"Élève ingénieur en Génie Industriel · ENSA Agadir",
+    hero_intro:"Je réduis les rebuts, je fluidifie les flux et je fais parler les données de production. Lean, Six Sigma et outils digitaux au service de la performance opérationnelle.",
+    hero_cta1:"Me contacter",hero_cta2:"Voir mon CV",
+    about_t:"À propos",
+    xp_t:"Expériences professionnelles",xp_lead:"Trois stages, trois secteurs : automobile, aéronautique, agroalimentaire. Cliquez sur une expérience pour voir le détail.",
+    sk_t:"Compétences",
+    edu_t:"Formation & certifications",edu_sub1:"Parcours académique",edu_sub2:"Certifications",
+    act_t:"Leadership & parascolaire",act_lead:"Organiser des événements industriels et m'engager sur le terrain avec le Club Social : deux façons de mettre en pratique la gestion de projet et le travail d'équipe. Cliquez sur une carte pour voir les détails et les photos.",
+    ct_t:"Contact",ct_h:"Travaillons ensemble",ct_p:"Je recherche un stage de fin d'études (PFE) en amélioration continue, qualité ou gestion de production. Écrivez-moi, je réponds rapidement.",
+    ct_loc_l:"Mobilité",ct_loc:"Tout le Maroc · Permis B",
+    f_name:"Nom",f_mail:"Email",f_msg:"Message",f_send:"Envoyer le message",
+    f_err:"Merci de remplir les trois champs avec un email valide.",
+    f_ok:"Votre application mail va s'ouvrir avec le message prêt. Si rien ne s'ouvre, écrivez directement à yahyadebbagh20@gmail.com.",
+    tb_1:"Dessiné par",tb_2:"Établissement",tb_3:"Échelle",tb_4:"Révision",
+    m_close:"Fermer",m_proj:"Projet",m_miss:"Missions principales",m_res:"Résultats",m_skills:"Compétences mobilisées",m_dmaic:"Démarche DMAIC",m_role:"Mon rôle",m_photos:"Photos",ph_soon:"Photo à venir",
+    before:"Avant",after:"Après",cv_t:"Curriculum vitæ",cv_sub:"Version PDF disponible sur demande"
+  },
+  en:{
+    nav_about:"About",nav_xp:"Experience",nav_skills:"Skills",nav_edu:"Education",nav_act:"Activities",nav_contact:"Contact",
+    hero_status:"Open to opportunities · Final-year internship",
+    hero_role:"Industrial Engineering Student · ENSA Agadir",
+    hero_intro:"I cut scrap, smooth out production flow and turn shop-floor data into decisions, using Lean, Six Sigma and digital tools to drive operational performance.",
+    hero_cta1:"Get in touch",hero_cta2:"View my CV",
+    about_t:"About me",
+    xp_t:"Professional experience",xp_lead:"Three internships across three industries: automotive, aerospace and food processing. Click an entry for the full details.",
+    sk_t:"Skills",
+    edu_t:"Education & certifications",edu_sub1:"Academic path",edu_sub2:"Certifications",
+    act_t:"Leadership & activities",act_lead:"Organising industry events and volunteering on the ground with the Social Club: two ways I put project management and teamwork into practice. Click a card for details and photos.",
+    ct_t:"Contact",ct_h:"Let's work together",ct_p:"I'm looking for a final-year engineering internship in continuous improvement, quality or production management. Send me a message and I'll get back to you quickly.",
+    ct_loc_l:"Mobility",ct_loc:"Anywhere in Morocco · Driving licence",
+    f_name:"Name",f_mail:"Email",f_msg:"Message",f_send:"Send message",
+    f_err:"Please fill in all three fields with a valid email.",
+    f_ok:"Your mail app will open with the message ready. If nothing opens, write directly to yahyadebbagh20@gmail.com.",
+    tb_1:"Drawn by",tb_2:"School",tb_3:"Scale",tb_4:"Revision",
+    m_close:"Close",m_proj:"Project",m_miss:"Main missions",m_res:"Results",m_skills:"Skills applied",m_dmaic:"DMAIC approach",m_role:"My role",m_photos:"Photos",ph_soon:"Photo coming soon",
+    before:"Before",after:"After",cv_t:"Curriculum vitae",cv_sub:"PDF version available on request"
+  }
+};
+
+const KPIS = [
+  {v:'<em>−36</em> %', fr:"de rebut sur la ligne CX740 (Ford)", en:"scrap rate on the CX740 line (Ford)"},
+  {v:'224<em>→</em>48', fr:"criticité AMDEC après actions", en:"FMEA criticality after actions"},
+  {v:'3', fr:"stages en industrie", en:"industry internships"},
+  {v:'7', fr:"certifications", en:"certifications"}
+];
+
+const TOOLS = ["Lean Six Sigma","DMAIC","AMDEC / FMEA","5S","Kaizen","TPM","SMED","Kanban","Ishikawa","5 Pourquoi / 5 Whys","Power BI","Excel VBA","Python","Streamlit","SQL","R","Matlab","SAP","Odoo","CATIA V5","AMOS","MySQL","Supabase","Machine Learning"];
+
+const ABOUT = {
+  fr:[
+    "L'amélioration continue n'est pas seulement une méthode que j'étudie. C'est ma façon d'aborder chaque problème.",
+    "Élève ingénieur en Génie Industriel à l'ENSA Agadir, je m'oriente vers l'amélioration continue, la gestion de production et le contrôle qualité en milieu manufacturier. Je m'appuie sur trois réflexes : éliminer le gaspillage, piloter les projets avec un objectif clair, et décider à partir des données.",
+    "Chez Tesca Maroc, j'ai mené un projet Six Sigma DMAIC qui a fait passer le taux de rebut d'une ligne Ford de 4,09 % à 2,6 %. Chez Royal Air Maroc, j'ai développé une application web pour digitaliser le suivi de la maintenance moteurs et APU.",
+    "Rigoureux, analytique et à l'aise en équipe, je cherche à rejoindre des équipes qui prennent la performance au sérieux."
+  ],
+  en:[
+    "Continuous improvement isn't just a method I study. It's how I approach every problem.",
+    "As an Industrial Engineering student at ENSA Agadir, I focus on continuous improvement, production management and quality control in manufacturing. I rely on three habits: eliminate waste, run projects with a clear goal, and decide from data.",
+    "At Tesca Maroc, I led a Six Sigma DMAIC project that cut the scrap rate on a Ford line from 4.09% to 2.6%. At Royal Air Maroc, I built a web app to digitalise engine and APU maintenance tracking.",
+    "Rigorous, analytical and a natural team player, I want to join teams that take performance seriously."
+  ]
+};
+
+const FACTS = [
+  {l:{fr:"Spécialité",en:"Focus"}, v:{fr:"Lean · Six Sigma · Qualité",en:"Lean · Six Sigma · Quality"}},
+  {l:{fr:"Secteurs",en:"Industries"}, v:{fr:"Automobile · Aéronautique · Agroalimentaire",en:"Automotive · Aerospace · Food processing"}},
+  {l:{fr:"Qualités",en:"Strengths"}, v:{fr:"Esprit analytique · Leadership · Travail d'équipe",en:"Analytical · Leadership · Teamwork"}},
+  {l:{fr:"Recherche",en:"Looking for"}, v:{fr:"Stage de fin d'études (PFE)",en:"Final-year internship"}}
+];
+
+const XP = [
+  {
+    id:"tesca",
+    when:{fr:"Juil. – Août 2026",en:"Jul – Aug 2026"}, type:{fr:"Stage PFA",en:"Engineering internship"},
+    title:{fr:"Stage ingénieur manufacturing",en:"Manufacturing engineering intern"},
+    co:"Tesca Maroc · Tanger Free Zone",
+    subj:{fr:"Réduction du taux de rebut sur la ligne CX740 (client Ford) par la méthode Six Sigma DMAIC",en:"Reducing the scrap rate on the CX740 line (Ford) with Six Sigma DMAIC"},
+    short:{fr:"Projet Six Sigma chez un équipementier automobile de rang 1 : analyse d'un défaut de manque de matière et plan d'actions Lean sur la ligne.",en:"Six Sigma project at a Tier-1 automotive supplier: root-cause analysis of a short-shot (missing material) defect and a Lean action plan on the line."},
+    result:[{b:"4,09→2,6 %",fr:"rebut",en:"scrap"},{b:"224→48",fr:"criticité AMDEC",en:"FMEA RPN"}],
+    tags:["Six Sigma DMAIC","AMDEC","Ishikawa","5 Whys","5S","TPM","SMED","Kanban"],
+    dmaic:{fr:["Définir","Mesurer","Analyser","Améliorer","Contrôler"],en:["Define","Measure","Analyze","Improve","Control"]},
+    miss:{fr:[
+      "Conduite d'un projet Six Sigma selon la démarche DMAIC sur la ligne CX740, destinée au client Ford.",
+      "Analyse du défaut de manque de matière avec le diagramme d'Ishikawa et la méthode des 5 Pourquoi.",
+      "Réalisation d'une AMDEC pour hiérarchiser les modes de défaillance et cibler les actions correctives.",
+      "Déploiement d'outils Lean (5S, TPM, SMED, Kanban) pour améliorer le TRS de la ligne."
+    ],en:[
+      "Led a Six Sigma project following the DMAIC approach on the CX740 line, supplying Ford.",
+      "Analysed the missing-material defect with an Ishikawa diagram and the 5 Whys method.",
+      "Ran an FMEA to rank failure modes and target corrective actions.",
+      "Deployed Lean tools (5S, TPM, SMED, Kanban) to improve the line's OEE."
+    ]},
+    ba:true,
+    photos:[{src:"img/xp/tesca-1.jpg",pos:"center 66%"},{src:"img/xp/tesca-2.jpg"},{src:"img/xp/tesca-3.jpg"}]
+  },
+  {
+    id:"ram",
+    when:{fr:"Juil. – Août 2025",en:"Jul – Aug 2025"}, type:{fr:"Stage d'application",en:"Engineering internship"},
+    title:{fr:"Stage ingénieur maintenance",en:"Maintenance engineering intern"},
+    co:"Royal Air Maroc · Nouaceur",
+    subj:{fr:"Digitalisation du suivi des tâches de navigabilité des moteurs et APU",en:"Digitalising airworthiness task tracking for engines and APUs"},
+    short:{fr:"Immersion dans la maintenance aéronautique et développement d'une application web interactive pour suivre les tâches de maintenance moteurs et APU.",en:"Hands-on immersion in aircraft maintenance and development of an interactive web app to track engine and APU maintenance tasks."},
+    tags:["Python","Streamlit","Excel","AMOS","Maintenance"],
+    miss:{fr:[
+      "Observation des procédures de maintenance aéronautique, avec une spécialisation sur les moteurs et les APU.",
+      "Étude des différents types de turboréacteurs et d'APU exploités dans l'aviation et dans la flotte de Royal Air Maroc.",
+      "Développement d'une application web interactive (Python, Streamlit) pour optimiser le suivi des tâches de maintenance.",
+      "Application des connaissances en maintenance industrielle et en instrumentation."
+    ],en:[
+      "Observed aircraft maintenance procedures, specialising in engines and APUs.",
+      "Studied the turbofan engine and APU types used in aviation and across the Royal Air Maroc fleet.",
+      "Built an interactive web app (Python, Streamlit) to streamline maintenance task tracking.",
+      "Applied industrial maintenance and instrumentation knowledge."
+    ]},
+    res:{fr:[
+      "Un outil digital qui centralise le suivi des tâches de navigabilité et facilite la gestion des flux de travail.",
+      "Un tableau de bord global « Moteurs & APU » qui couvre 8 catégories de suivi : changements de moteurs, moteurs en leasing, contrats et appels d'offres, moteurs en atelier, moteurs sous surveillance, moteurs de rechange, monitoring et autres tâches.",
+      "Des fonctions pour consulter, modifier, exporter et supprimer les données, et importer des fichiers Excel existants.",
+      "Une compréhension concrète des exigences de la maintenance aéronautique."
+    ],en:[
+      "A digital tool that centralises airworthiness task tracking and makes workflow management easier.",
+      "A global \"Engines & APU\" dashboard covering 8 tracking categories: engine changes, lease engines, contracts and tenders, in-shop engines, engines on watch, spare engines, monitoring and other tasks.",
+      "Features to view, edit, export and delete records, and to import existing Excel files.",
+      "A practical understanding of aviation maintenance requirements."
+    ]},
+    photos:[{src:"img/xp/ram-1.jpg"},{src:"img/xp/ram-2.jpg",pos:"center 40%"},{src:"img/xp/ram-3.jpg",pos:"left top"}]
+  },
+  {
+    id:"aem",
+    when:{fr:"Juil. – Août 2024",en:"Jul – Aug 2024"}, type:{fr:"Stage d'observation",en:"Observation internship"},
+    title:{fr:"Stage ingénieur conception",en:"Design engineering intern"},
+    co:"AEM Aït Melloul Électromécanique · Agadir",
+    subj:{fr:"Amélioration d'une calibreuse de tomates cerises",en:"Improving a cherry-tomato grading machine"},
+    short:{fr:"Travail sur une machine de tri de tomates cerises : amélioration de la calibreuse, optimisation des aligneurs et rédaction du cahier des charges.",en:"Worked on a cherry-tomato sorting machine: improving the grader, optimising the aligners and writing the specifications."},
+    tags:{fr:["Conception mécanique","Cahier des charges","Optimisation"],en:["Mechanical design","Specifications","Optimisation"]},
+    miss:{fr:[
+      "Amélioration d'une calibreuse de tomates cerises.",
+      "Optimisation de l'efficacité des dispositifs d'alignement des tomates.",
+      "Élaboration du cahier des charges de la machine."
+    ],en:[
+      "Improved a cherry-tomato grading machine.",
+      "Optimised the efficiency of the tomato alignment devices.",
+      "Wrote the machine's specifications document."
+    ]},
+    photos:[{src:"img/xp/aem-1.jpg",pos:"center 40%"},{src:"img/xp/aem-2.jpg",pos:"center 45%"}]
+  }
+];
+
+const SKILLS = [
+  {t:{fr:"Lean & Qualité",en:"Lean & Quality"}, i:["Lean Six Sigma","DMAIC","5S","Kaizen","MSP / SPC",{fr:"Systèmes de management de la qualité",en:"Quality management systems"}]},
+  {t:{fr:"Production & Maintenance",en:"Production & Maintenance"}, i:["AMDEC / FMEA",{fr:"Sûreté de fonctionnement",en:"Dependability"},{fr:"Maintenance industrielle",en:"Industrial maintenance"},"TPM","SMED","Kanban"]},
+  {t:{fr:"Data & IA",en:"Data & AI"}, i:["Power BI","Excel VBA","Machine Learning","KNN","Random Forest","ANN","Data Mining"]},
+  {t:{fr:"Programmation",en:"Programming"}, i:["Python","Java","R","SQL","Matlab","C++"]},
+  {t:{fr:"Bases de données & SI",en:"Databases & IS"}, i:["MySQL","Supabase","UML (Astah)","SAP","Odoo","Streamlit"]},
+  {t:{fr:"CAO & gestion de projet",en:"CAD & project management"}, i:["CATIA V5","Part Design","Assembly Design",{fr:"Gestion de projet",en:"Project management"},"Supply Chain"]}
+];
+
+const LANGS = [
+  {n:{fr:"Arabe",en:"Arabic"}, l:{fr:"Langue maternelle",en:"Native"}, p:100},
+  {n:{fr:"Français",en:"French"}, l:{fr:"B2 · TCF",en:"B2 · TCF"}, p:75},
+  {n:{fr:"Anglais",en:"English"}, l:{fr:"80 % · EF SET",en:"80% · EF SET"}, p:80}
+];
+
+const EDU = [
+  {y:{fr:"2023 – aujourd'hui",en:"2023 – present"}, t:{fr:"Cycle ingénieur en Génie Industriel",en:"Engineering degree, Industrial Engineering"}, s:"ENSA Agadir"},
+  {y:"2021 – 2023", t:{fr:"Classes préparatoires aux grandes écoles",en:"Preparatory classes for engineering schools"}, s:{fr:"Lycée Reda Slaoui, Agadir",en:"Reda Slaoui High School, Agadir"}},
+  {y:"2021", t:{fr:"Baccalauréat Sciences Mathématiques B",en:"Baccalaureate in Mathematical Sciences (B)"}, s:{fr:"Institution Al Inbiaat, Agadir",en:"Al Inbiaat Institution, Agadir"}}
+];
+
+const CERTS = [
+  {t:"Become a Six Sigma Green Belt", o:"LinkedIn Learning · 2025", star:true},
+  {t:"Introduction to Project Management", o:"IBM · Coursera · 2025", star:true},
+  {t:"Supply Chain Logistics", o:"Rutgers University · Coursera · 2024", star:true},
+  {t:"Six Sigma Foundations", o:"LinkedIn Learning · 2025"},
+  {t:"Operational Excellence Foundations", o:"LinkedIn Learning · 2025"},
+  {t:"Process Improvement Foundations", o:"LinkedIn Learning · 2026"},
+  {t:"Statistics Foundations 4: Advanced Topics", o:"LinkedIn Learning · 2025"}
+];
+
+const ACT_GROUPS = [
+  {k:"events", t:{fr:"Événements industriels · Club Industriel & ADE",en:"Industry events · Industrial Club & Student Association"}},
+  {k:"social", t:{fr:"Caravanes « Lueur d'espoir » · Club Social ENSA Agadir",en:"\"Glimmer of Hope\" caravans · ENSA Agadir Social Club"}}
+];
+const P = "img/act/";
+const ACTS = [
+  {
+    id:"indusday2", g:"events", when:{fr:"Avril 2025",en:"April 2025"},
+    t:{fr:"IndusDay · 2e édition",en:"IndusDay · 2nd edition"},
+    r:{fr:"Responsable logistique",en:"Head of logistics"},
+    s:{fr:"Journée industrielle de l'ENSA Agadir sur le thème « Innovation et durabilité : les défis de l'industrie vers l'excellence opérationnelle ».",en:"ENSA Agadir's industry day, themed \"Innovation and sustainability: industry's path to operational excellence\"."},
+    role:{fr:[
+      "Supervision de l'ensemble de la logistique de l'événement.",
+      "Coordination avec les prestataires.",
+      "Répartition et suivi des tâches au sein de l'équipe logistique."
+    ],en:[
+      "Oversaw all event logistics.",
+      "Coordinated with suppliers.",
+      "Assigned and tracked tasks across the logistics team."
+    ]},
+    photos:[{f:"indusday2-1.jpg",pos:"center 20%"},{f:"indusday2-3.jpg"},{f:"indusday2-2.jpg",pos:"center 25%"}]
+  },
+  {
+    id:"indusday1", g:"events", when:{fr:"Avril 2024",en:"April 2024"},
+    t:{fr:"IndusDay · 1re édition",en:"IndusDay · 1st edition"},
+    r:{fr:"Membre de l'équipe d'organisation",en:"Organising team member"},
+    s:{fr:"Première édition de la journée industrielle, sur le thème « Stratégies industrielles : l'ère de la révolution industrielle au Maroc », avec des conférences et des partages d'expérience d'ingénieurs.",en:"The first industry day, themed \"Industrial strategies: the era of Morocco's industrial revolution\", with talks and experience-sharing sessions from engineers."},
+    role:{fr:[
+      "Participation à l'organisation de l'événement avec le Club Industriel et l'Association des étudiants.",
+      "Accueil des intervenants et des participants.",
+      "Soutien au déroulement des conférences, dont le panel « Compétences essentielles pour les ingénieurs industriels »."
+    ],en:[
+      "Helped organise the event with the Industrial Club and the Student Association.",
+      "Welcomed speakers and attendees.",
+      "Supported the talks, including the panel on essential skills for industrial engineers."
+    ]},
+    photos:[{f:"indusday1-2.jpg",pos:"center 25%"},{f:"indusday1-1.jpg"}]
+  },
+  {
+    id:"caravane3", g:"social", when:{fr:"Mai 2026",en:"May 2026"},
+    t:{fr:"Caravane humanitaire · 5e édition",en:"Humanitarian caravan · 5th edition"},
+    r:{fr:"Bénévole",en:"Volunteer"},
+    s:{fr:"Caravane humanitaire dans un village de montagne : forage d'un puits, distribution de paniers alimentaires, rénovation d'une école et d'une mosquée, et animations pour les enfants.",en:"A humanitarian caravan to a mountain village: drilling a well, handing out food baskets, renovating a school and a mosque, and running activities for children."},
+    role:{fr:[
+      "Participation à la préparation et au déroulement de la caravane.",
+      "Suivi du chantier de forage du puits, pour un accès durable à l'eau.",
+      "Contribution aux travaux de rénovation et à la distribution des paniers alimentaires.",
+      "Échanges avec les habitants du village."
+    ],en:[
+      "Took part in preparing and running the caravan.",
+      "Followed the well-drilling site, bringing lasting access to water.",
+      "Helped with renovation work and the food basket distribution.",
+      "Engaged with the village residents."
+    ]},
+    photos:[{f:"caravane3-1.jpg",pos:"center 70%"},{f:"caravane3-2.jpg"}]
+  },
+  {
+    id:"caravane2", g:"social", when:{fr:"Mars 2025",en:"March 2025"},
+    t:{fr:"Caravane humanitaire · aménagement",en:"Humanitarian caravan · site work"},
+    r:{fr:"Bénévole",en:"Volunteer"},
+    s:{fr:"Caravane solidaire dans un village rural : travaux d'aménagement extérieur et aide aux familles, en équipe avec les bénévoles du Club Social.",en:"A solidarity caravan to a rural village: outdoor improvement work and support for families, alongside the Social Club volunteers."},
+    role:{fr:[
+      "Travaux de terrassement et de nettoyage des espaces extérieurs.",
+      "Travail en équipe sur le chantier.",
+      "Contribution à l'amélioration du cadre de vie des habitants."
+    ],en:[
+      "Earthworks and clearing of outdoor areas.",
+      "Teamwork on site.",
+      "Helped improve residents' living conditions."
+    ]},
+    photos:[{f:"caravane2-1.jpg"},{f:"caravane2-2.jpg"}]
+  },
+  {
+    id:"caravane1", g:"social", when:{fr:"Mars 2024",en:"March 2024"},
+    t:{fr:"Caravane humanitaire · rénovation",en:"Humanitarian caravan · renovation"},
+    r:{fr:"Bénévole",en:"Volunteer"},
+    s:{fr:"Ma première caravane avec le Club Social : chantier de rénovation dans un village, avec la peinture d'une mosquée et des travaux d'enduit.",en:"My first caravan with the Social Club: a renovation project in a village, painting a mosque and plastering walls."},
+    role:{fr:[
+      "Peinture et remise en état des murs intérieurs.",
+      "Travaux d'enduit et de finition.",
+      "Travail en équipe avec les autres bénévoles."
+    ],en:[
+      "Painted and restored interior walls.",
+      "Plastering and finishing work.",
+      "Teamwork with the other volunteers."
+    ]},
+    photos:[{f:"caravane1-1.jpg",pos:"center 30%"},{f:"caravane1-2.jpg",pos:"center 65%"}]
+  }
+];
+
+const srcOf = p => p.src || P + p.f;
+let lang = "fr";
+try{ const s = localStorage.getItem("yd-lang"); if(s==="en"||s==="fr") lang = s; }catch(e){}
+const L = v => (v && typeof v==="object" && !Array.isArray(v)) ? v[lang] : v;
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const $ = id => document.getElementById(id);
+const tagsHTML = arr => `<div class="tags">${(L(arr)||[]).map(t=>`<span class="tag">${esc(L(t))}</span>`).join("")}</div>`;
+
+function render(){
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{ el.textContent = T[lang][el.dataset.i18n]; });
+  document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.lang===lang)));
+  $("m-close").setAttribute("aria-label", T[lang].m_close);
+
+  $("kpis").innerHTML = KPIS.map(k=>`<div class="kpi"><strong>${k.v}</strong><span>${esc(k[lang])}</span></div>`).join("");
+  const chips = TOOLS.map(t=>`<span class="chip">${esc(t)}</span>`).join("");
+  $("tools").innerHTML = chips + chips.replace(/class="chip"/g,'class="chip" aria-hidden="true"');
+
+  $("about-txt").innerHTML = ABOUT[lang].map(p=>`<p>${esc(p)}</p>`).join("");
+  $("facts").innerHTML = FACTS.map(f=>`<div class="fact"><span class="mono">${esc(L(f.l))}</span><div>${esc(L(f.v))}</div></div>`).join("");
+
+  $("xp-list").innerHTML = XP.map(x=>`
+    <button class="xp" type="button" data-xp="${x.id}">
+      <div class="xp-img"><img src="${srcOf(x.photos[0])}" alt="" loading="lazy" style="object-position:${x.photos[0].pos||"center"}"></div>
+      <div>
+        <div class="when"><b>${esc(L(x.type))}</b> · ${esc(L(x.when))}</div>
+        <h3>${esc(L(x.title))}</h3>
+        <div class="co">${esc(x.co)}</div>
+        <p>${esc(L(x.short))}</p>
+        ${x.result?`<div class="result">${x.result.map(r=>`<div><b>${esc(lang==="en"?r.b.replace(",","."):r.b)}</b>${esc(r[lang])}</div>`).join("")}</div>`:""}
+        ${tagsHTML(x.tags)}
+      </div>
+      <span class="more">${lang==="fr"?"Détails":"Details"} →</span>
+    </button>`).join("");
+
+  $("skills-grid").innerHTML = SKILLS.map(s=>`<div class="skill"><h3><i></i>${esc(L(s.t))}</h3>${tagsHTML(s.i)}</div>`).join("");
+  $("langs").innerHTML = LANGS.map(l=>`<div class="lng"><b>${esc(L(l.n))}</b><span class="mono">${esc(L(l.l))}</span><div class="bar"><span style="width:${l.p}%"></span></div></div>`).join("");
+
+  $("timeline").innerHTML = EDU.map(e=>`<div class="step"><span class="mono">${esc(L(e.y))}</span><h3>${esc(L(e.t))}</h3><div>${esc(L(e.s))}</div></div>`).join("");
+  $("certs").innerHTML = CERTS.map(c=>`<div class="cert${c.star?" star":""}"><b>${esc(c.t)}</b><span>${esc(c.o)}</span></div>`).join("");
+
+  $("acts").innerHTML = ACT_GROUPS.map(g=>`
+    <div class="act-group"><p class="h-sub">${esc(L(g.t))}</p><div class="acts">
+    ${ACTS.filter(a=>a.g===g.k).map(a=>`
+      <button class="act" type="button" data-act="${a.id}">
+        <div class="ph"><img src="${P+a.photos[0].f}" alt="" loading="lazy" style="object-position:${a.photos[0].pos||"center"}"><span class="count">${a.photos.length} photos</span></div>
+        <div class="act-body"><span class="mono">${esc(L(a.when))} · ${esc(L(a.r))}</span><h3>${esc(L(a.t))}</h3><p>${esc(L(a.s))}</p></div>
+      </button>`).join("")}
+    </div></div>`).join("");
+}
+
+const modal = $("modal");
+function openModal(title, when, subj, body){
+  $("m-title").textContent = title; $("m-when").textContent = when; $("m-subj").textContent = subj || "";
+  $("m-body").innerHTML = body; modal.showModal(); $("m-body").scrollTop = 0;
+}
+const list = arr => `<ul>${arr.map(i=>`<li>${esc(i)}</li>`).join("")}</ul>`;
+
+function openXP(id){
+  const x = XP.find(e=>e.id===id), t = T[lang];
+  let b = "";
+  if(x.dmaic) b += `<h4>${t.m_dmaic}</h4><div class="dmaic">${x.dmaic[lang].map(s=>`<div><b>${s[0]}</b><span>${esc(s)}</span></div>`).join("")}</div>`;
+  b += `<h4>${t.m_miss}</h4>${list(L(x.miss))}`;
+  if(x.ba){
+    const n = lang==="en" ? (v=>v.replace(",",".")) : (v=>v);
+    b += `<h4>${t.m_res}</h4><div class="ba">
+      <div class="ba-card"><span class="mono">${lang==="fr"?"Taux de rebut":"Scrap rate"}</span>
+        <div class="ba-row"><span>${t.before}</span><div class="track2"><span style="width:100%;background:#8E9AB0"></span></div><b>${n("4,09")} %</b></div>
+        <div class="ba-row"><span>${t.after}</span><div class="track2"><span style="width:${(2.6/4.09*100).toFixed(1)}%;background:var(--accent)"></span></div><b>${n("2,6")} %</b></div>
+        <div class="ba-delta">−36 %</div></div>
+      <div class="ba-card"><span class="mono">${lang==="fr"?"Criticité AMDEC":"FMEA criticality (RPN)"}</span>
+        <div class="ba-row"><span>${t.before}</span><div class="track2"><span style="width:100%;background:#8E9AB0"></span></div><b>224</b></div>
+        <div class="ba-row"><span>${t.after}</span><div class="track2"><span style="width:${(48/224*100).toFixed(1)}%;background:var(--accent)"></span></div><b>48</b></div>
+        <div class="ba-delta">−79 %</div></div>
+    </div>`;
+  } else if(x.res){
+    b += `<h4>${t.m_res}</h4>${list(L(x.res))}`;
+  }
+  b += `<h4>${t.m_skills}</h4>${tagsHTML(x.tags)}`;
+  if(x.photos){ vList = x.photos; b += `<h4>${t.m_photos}</h4><div class="gallery">${galleryHTML(x.photos)}</div>`; }
+  openModal(`${L(x.title)} · ${x.co.split(" · ")[0]}`, `${L(x.type)} · ${L(x.when)} · ${x.co.split(" · ")[1]}`, L(x.subj), b);
+}
+
+let vList = [], vIdx = 0;
+const viewer = $("viewer");
+const galleryHTML = arr => arr.map((p,i)=>`<button type="button" data-photo="${i}" aria-label="Photo ${i+1}"><img src="${srcOf(p)}" alt="" loading="lazy" style="object-position:${p.pos||"center"}"></button>`).join("");
+function showPhoto(){ $("v-img").src = srcOf(vList[vIdx]); $("v-count").textContent = `${vIdx+1} / ${vList.length}`; }
+function openAct(id){
+  const a = ACTS.find(e=>e.id===id), t = T[lang];
+  vList = a.photos;
+  const pics = galleryHTML(a.photos);
+  openModal(L(a.t), `${L(a.when)} · ${L(a.r)}`, "", `<p>${esc(L(a.s))}</p><h4>${t.m_role}</h4>${list(L(a.role))}<h4>${t.m_photos}</h4><div class="gallery">${pics}</div>`);
+}
+
+document.addEventListener("click", e=>{
+  const xp = e.target.closest("[data-xp]"); if(xp) return openXP(xp.dataset.xp);
+  const act = e.target.closest("[data-act]"); if(act) return openAct(act.dataset.act);
+  const ph = e.target.closest("[data-photo]"); if(ph){ vIdx = +ph.dataset.photo; showPhoto(); viewer.showModal(); return; }
+  const lb = e.target.closest("[data-lang]");
+  if(lb){ lang = lb.dataset.lang; try{localStorage.setItem("yd-lang",lang)}catch(err){} render(); }
+});
+$("open-cv").addEventListener("click", ()=>openModal(T[lang].cv_t, "Yahya Debbagh", T[lang].cv_sub, `<img class="cv-img" src="img/cv.jpg" alt="CV Yahya Debbagh">`));
+$("m-close").addEventListener("click", ()=>modal.close());
+$("v-close").addEventListener("click", ()=>viewer.close());
+$("v-prev").addEventListener("click", ()=>{ vIdx=(vIdx-1+vList.length)%vList.length; showPhoto(); });
+$("v-next").addEventListener("click", ()=>{ vIdx=(vIdx+1)%vList.length; showPhoto(); });
+viewer.addEventListener("click", e=>{ if(e.target===viewer) viewer.close(); });
+viewer.addEventListener("keydown", e=>{ if(e.key==="ArrowLeft") $("v-prev").click(); if(e.key==="ArrowRight") $("v-next").click(); });
+modal.addEventListener("click", e=>{ if(e.target===modal) modal.close(); });
+
+$("form").addEventListener("submit", e=>{
+  e.preventDefault();
+  const n=$("f-name").value.trim(), m=$("f-mail").value.trim(), msg=$("f-msg").value.trim();
+  if(!n || !msg || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m)){ $("form-note").textContent = T[lang].f_err; return; }
+  const subject = encodeURIComponent(`Portfolio · ${n}`);
+  const body = encodeURIComponent(`${msg}\n\n${n} · ${m}`);
+  $("form-note").textContent = T[lang].f_ok;
+  try{ window.location.href = `mailto:yahyadebbagh20@gmail.com?subject=${subject}&body=${body}`; }catch(err){}
+});
+
+render();
+</script>
+</body>
+</html>
