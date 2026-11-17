@@ -160,32 +160,38 @@ section{padding:72px 0}
 @media (max-width:560px){.skills,.langs{grid-template-columns:1fr}}
 
 /* EDUCATION */
-.edu-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:40px}
-.timeline{position:relative;padding-left:26px;display:grid;gap:22px;align-content:start}
-.timeline::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:1px;background:var(--line)}
-.step{position:relative;display:grid;grid-template-columns:128px 1fr;gap:18px;align-items:center}
-.sl.full{padding:0;overflow:hidden;width:106px}.sl.full img{left:0;top:0;width:100%;height:100%;object-fit:cover}
-.sl{height:76px;border-radius:10px;background:#fff;display:grid;place-items:center;padding:6px 10px;border:1px solid var(--line)}
-.sl{position:relative}.sl img{position:absolute;left:10px;top:6px;width:calc(100% - 20px);height:calc(100% - 12px);object-fit:contain}
-.sl.mn{background:linear-gradient(135deg,#16233a,#0f1a2c);color:var(--data);font-family:var(--display);font-weight:800;font-size:17px;letter-spacing:.04em}
-.step::before{content:"";position:absolute;left:-26px;top:33px;width:11px;height:11px;border:2px solid var(--accent);background:var(--ink);transform:rotate(45deg)}
+.edu-grid{display:grid;grid-template-columns:1fr;gap:52px}
+.timeline{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.step{display:flex;flex-direction:column;gap:16px;border:1px solid var(--line);border-radius:14px;padding:22px;background:rgba(16,26,43,.82);transition:transform .25s,border-color .25s,box-shadow .25s}
+.step:hover{transform:translateY(-3px);border-color:#36507a;box-shadow:0 12px 30px rgba(0,0,0,.35)}
+.sl{position:relative;width:132px;height:76px;flex:none;border-radius:10px;background:#fff;border:1px solid var(--line)}
+.sl img{position:absolute;left:10px;top:6px;width:calc(100% - 20px);height:calc(100% - 12px);object-fit:contain}
+.sl.full{width:106px;overflow:hidden}.sl.full img{left:0;top:0;width:100%;height:100%;object-fit:cover}
+.sl.mn{display:grid;place-items:center;background:linear-gradient(135deg,#16233a,#0f1a2c);color:var(--data);font-family:var(--display);font-weight:800;font-size:17px;letter-spacing:.04em}
+.step.main{grid-column:1/-1;flex-direction:row;align-items:center;gap:32px;padding:30px 34px;border-color:#5a3a1c;background:linear-gradient(135deg,rgba(255,122,26,.12),rgba(16,26,43,.82) 62%)}
+.step.main .sl{width:200px;height:118px}
+.step.main h3{font-size:28px;margin:6px 0 6px}
+.step.main .st>div{font-size:17px}
+.step.main .mono{font-size:13px}
 .step .mono{color:var(--data)}
-.step h3{font-size:19px;font-weight:700;margin:4px 0 2px}
+.step h3{font-size:19px;font-weight:700;line-height:1.3;margin:4px 0 4px}
 .step .st>div{color:var(--muted);font-size:15px}
 .h-sub{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 16px}
-.certs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.cert{border:1px solid var(--line);border-radius:10px;padding:16px;background:rgba(16,26,43,.82);display:grid;gap:4px}
-a.cert{position:relative;text-decoration:none;color:inherit;cursor:pointer}
-.cert .ci{position:absolute;top:14px;right:14px;width:20px;height:20px;opacity:.9}.cert .ci svg{display:block;width:100%;height:100%}
-.cert b{font-weight:600;font-size:15px;line-height:1.35;padding-right:26px}
-.cert .cv{font-style:normal;font-family:var(--mono);font-size:11.5px;color:var(--data);margin-top:8px;letter-spacing:.02em}
+.certs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.cert{display:flex;flex-direction:column;gap:12px;border:1px solid var(--line);border-radius:14px;padding:20px;background:rgba(16,26,43,.82)}
+a.cert{text-decoration:none;color:inherit;cursor:pointer}
+.cert .top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.cert .pill{display:inline-flex;align-items:center;gap:7px;font-size:12px;line-height:1;padding:6px 11px 6px 8px;border-radius:999px;border:1px solid rgba(92,198,238,.35);background:rgba(92,198,238,.08);color:var(--data)}
+.cert .ci{display:block;width:15px;height:15px;flex:none}.cert .ci svg{display:block;width:100%;height:100%}
+.cert .yr{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+.cert b{font-weight:700;font-size:17px;line-height:1.35}
+.cert .by{font-size:14px;color:var(--data)}
+.cert .cv{font-style:normal;font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:auto;padding-top:6px;letter-spacing:.02em}
 .cert:hover .cv{color:var(--accent)}
 .cert:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-.cert span{font-size:13px;color:var(--muted)}
 .cert.star{border-color:#5a3a1c;background:linear-gradient(135deg,rgba(255,122,26,.10),rgba(16,26,43,.82) 60%)}
-@media (max-width:860px){.edu-grid{grid-template-columns:1fr}}
-@media (max-width:480px){.step{grid-template-columns:92px 1fr;gap:14px}.sl{height:62px}.sl.full{width:87px}}
-@media (max-width:520px){.certs{grid-template-columns:1fr}}
+@media (max-width:980px){.timeline,.certs{grid-template-columns:1fr 1fr}}
+@media (max-width:620px){.timeline,.certs{grid-template-columns:1fr}.step.main{flex-direction:column;align-items:flex-start;gap:16px;padding:22px}.step.main .sl{width:160px;height:94px}.step.main h3{font-size:22px}}
 
 /* ACTIVITIES */
 .act-group{margin-bottom:40px}
@@ -640,7 +646,7 @@ const LANGS = [
 ];
 
 const EDU = [
-  {y:{fr:"2023 – aujourd'hui",en:"2023 – present"}, t:{fr:"Cycle ingénieur en Génie Industriel",en:"Engineering degree, Industrial Engineering"}, s:"ENSA Agadir", logo:"img/edu/ensa.png"},
+  {y:"2023 – 2027", t:{fr:"Cycle ingénieur en Génie Industriel",en:"Engineering degree, Industrial Engineering"}, s:"ENSA Agadir", logo:"img/edu/ensa.png"},
   {y:"2021 – 2023", t:{fr:"Classes préparatoires aux grandes écoles",en:"Preparatory classes for engineering schools"}, s:{fr:"Lycée Reda Slaoui, Agadir",en:"Reda Slaoui High School, Agadir"}, logo:"img/edu/cpge.png", full:true},
   {y:"2021", t:{fr:"Baccalauréat Sciences Mathématiques B",en:"Baccalaureate in Mathematical Sciences (B)"}, s:{fr:"Institution Al Inbiaat, Agadir",en:"Al Inbiaat Institution, Agadir"}, logo:"img/edu/inbiaat.png"}
 ];
@@ -780,8 +786,10 @@ function render(){
   $("skills-grid").innerHTML = SKILLS.map(s=>`<div class="skill"><h3><i></i>${esc(L(s.t))}</h3>${tagsHTML(s.i)}</div>`).join("");
   $("langs").innerHTML = LANGS.map(l=>`<div class="lng"><b>${esc(L(l.n))}</b><span class="mono">${esc(L(l.l))}</span><div class="bar"><span style="width:${l.p}%"></span></div></div>`).join("");
 
-  $("timeline").innerHTML = EDU.map(e=>`<div class="step"><div class="sl${e.logo?"":" mn"}${e.full?" full":""}">${e.logo?`<img src="${e.logo}" alt="${esc(L(e.s))}" loading="lazy">`:esc(e.mono||"")}</div><div class="st"><span class="mono">${esc(L(e.y))}</span><h3>${esc(L(e.t))}</h3><div>${esc(L(e.s))}</div></div></div>`).join("");
-  $("certs").innerHTML = CERTS.map(c=>`<a class="cert${c.star?" star":""}" href="${esc(c.url||LI_CERTS)}" target="_blank" rel="noopener noreferrer"><i class="ci">${ICONS[c.ic]||ICONS.cap}</i><b>${esc(c.t)}</b><span>${esc(c.o)}</span><em class="cv">${esc(c.url?T[lang].cert_open:T[lang].cert_li)} <span aria-hidden="true">↗</span></em></a>`).join("");
+  $("timeline").innerHTML = EDU.map((e,i)=>`<div class="step${i===0?" main":""}"><div class="sl${e.logo?"":" mn"}${e.full?" full":""}">${e.logo?`<img src="${e.logo}" alt="${esc(L(e.s))}" loading="lazy">`:esc(e.mono||"")}</div><div class="st"><span class="mono">${esc(L(e.y))}</span><h3>${esc(L(e.t))}</h3><div>${esc(L(e.s))}</div></div></div>`).join("");
+  $("certs").innerHTML = CERTS.map(c=>{
+    const parts=c.o.split(" · "), year=parts.pop(), plat=c.ic==="linkedin"?"LinkedIn Learning":"Coursera", by=parts.filter(p=>p!=="LinkedIn Learning"&&p!=="Coursera").join(" · ");
+    return `<a class="cert${c.star?" star":""}" href="${esc(c.url||LI_CERTS)}" target="_blank" rel="noopener noreferrer"><div class="top"><span class="pill"><i class="ci">${ICONS[c.ic]||ICONS.cap}</i>${plat}</span><span class="yr">${esc(year)}</span></div><b>${esc(c.t)}</b>${by?`<span class="by">${esc(by)}</span>`:""}<em class="cv">${esc(c.url?T[lang].cert_open:T[lang].cert_li)} <span aria-hidden="true">↗</span></em></a>`;}).join("");
 
   $("acts").innerHTML = ACT_GROUPS.map(g=>`
     <div class="act-group"><p class="h-sub">${esc(L(g.t))}</p><div class="acts">
