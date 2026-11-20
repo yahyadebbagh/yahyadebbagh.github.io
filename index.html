@@ -574,7 +574,7 @@ const T = {
     f_ok:"Votre application mail va s'ouvrir avec le message prêt. Si rien ne s'ouvre, écrivez directement à yahyadebbagh20@gmail.com.",
     
     m_close:"Fermer",m_proj:"Projet",m_miss:"Missions principales",m_res:"Résultats",m_skills:"Compétences mobilisées",m_dmaic:"Démarche DMAIC",m_role:"Mon rôle",m_prog:"Au programme",m_photos:"Photos",ph_soon:"Photo à venir",
-    before:"Avant",after:"Après",cv_t:"Curriculum vitæ",cv_sub:"Version PDF disponible sur demande"
+    before:"Avant",after:"Après",cv_t:"Curriculum vitæ",cv_sub:"Version novembre 2026",cv_dl:"Télécharger le CV (PDF)"
   },
   en:{
     nav_about:"About",nav_xp:"Experience",nav_skills:"Skills",nav_edu:"Education",nav_act:"Activities",nav_contact:"Contact",to_light:"Switch to light mode",to_dark:"Switch to dark mode",
@@ -594,7 +594,7 @@ const T = {
     f_ok:"Your mail app will open with the message ready. If nothing opens, write directly to yahyadebbagh20@gmail.com.",
     
     m_close:"Close",m_proj:"Project",m_miss:"Main missions",m_res:"Results",m_skills:"Skills applied",m_dmaic:"DMAIC approach",m_role:"My role",m_prog:"Programme",m_photos:"Photos",ph_soon:"Photo coming soon",
-    before:"Before",after:"After",cv_t:"Curriculum vitae",cv_sub:"PDF version available on request"
+    before:"Before",after:"After",cv_t:"Curriculum vitae",cv_sub:"November 2026 version",cv_dl:"Download CV (PDF)"
   }
 };
 
@@ -930,7 +930,7 @@ document.addEventListener("click", e=>{
   const lb = e.target.closest("[data-lang]");
   if(lb){ lang = lb.dataset.lang; try{localStorage.setItem("yd-lang",lang)}catch(err){} const y=scrollY; render(); scrollTo({top:y,behavior:"instant"}); }
 });
-$("open-cv").addEventListener("click", ()=>openModal(T[lang].cv_t, "Yahya Debbagh", T[lang].cv_sub, `<img class="cv-img" src="img/cv.jpg" alt="CV Yahya Debbagh">`));
+$("open-cv").addEventListener("click", ()=>openModal(T[lang].cv_t, "Yahya Debbagh", T[lang].cv_sub, `<p style="margin:0 0 14px"><a class="btn btn-primary" href="CV_Yahya_Debbagh.pdf" download="CV_Yahya_Debbagh.pdf">${T[lang].cv_dl}</a></p><img class="cv-img" src="cv.jpg" alt="CV Yahya Debbagh">`));
 $("m-close").addEventListener("click", ()=>modal.close());
 $("v-close").addEventListener("click", ()=>viewer.close());
 $("v-prev").addEventListener("click", ()=>{ vIdx=(vIdx-1+vList.length)%vList.length; showPhoto(); });
